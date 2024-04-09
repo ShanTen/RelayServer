@@ -18,9 +18,11 @@ function convertDateToEpoch(dateTimeString) {
     
     // Create a new Date object using the extracted values
     const dateObject = new Date(year, month, day, hour, minute);
+        
     
-    // Return the Unix epoch time (in seconds) corresponding to the date object
-    return dateObject.getTime(); // Convert milliseconds to seconds
+    let gmt = dateObject.getTime();
+    let ist = gmt + (5.5 * 60 * 60 * 1000);
+    return ist;
 }
 
 function breakDownMessageBodyArrIntoHeaderAndDate(msgBody) {
