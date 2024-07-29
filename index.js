@@ -5,8 +5,17 @@ const axios = require('axios');
 
 const app = express();
 
-//constants
-const API_url = `https://urchin-app-8wf89.ondigitalocean.app/household/log-data`
+const environment = `production` //`test` or `production`
+
+//constants\
+/**
+ * @warn
+ * You have to change API URL before deployment
+*/
+//const API_url = `https://urchin-app-8wf89.ondigitalocean.app/household/log-data`
+const digitalOceanURL = `https://sea-lion-app-hejjs.ondigitalocean.app/household/log-data`;
+const localHostURL = `http://localhost:3000/household/log-data`;
+const API_url = digitalOceanURL;
 
 function convertDateToEpoch(dateTimeString) {
     // Extract year, month, day, hour, and minute from the input string
@@ -105,7 +114,15 @@ app.post('/relay', (req, res) => {
 });
 
 //HTTP service
-const port_http = process.env.PORT || 3000;
+const port_http = process.env.PORT || 5000;
 app.listen(port_http, () => {
     console.log('http server running at ' + port_http)
+    
+    if(environment === `test`){
+        console.log("-".repeat(50));
+        console.log(`YOU HAVE SET YOUR ENVIRONMENT TO TEST`);
+        console.log(`API URL: ${API_url}`);
+        console.log("-".repeat(50));
+    }
+    
 })
