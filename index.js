@@ -117,6 +117,7 @@ app.post('/relay', (req, res) => {
 const port_http = process.env.PORT || 5000;
 app.listen(port_http, () => {
     console.log('http server running at ' + port_http)
+    console.log(`Backend url is ${digitalOceanURL}`)
     
     if(environment === `test`){
         console.log("-".repeat(50));
